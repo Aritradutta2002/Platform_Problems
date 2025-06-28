@@ -1,6 +1,9 @@
-# Ignore build output
-.out/
-
 # Ignore IntelliJ IDEA project files
 .idea/
 *.iml
+
+# Ignore Java compiled files
+*.class
+
+# Ignore output directory
+.out/
