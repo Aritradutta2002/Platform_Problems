@@ -67,7 +67,7 @@ public class Appartments {
     static void ruffleSort(int[] arr) {
         int n = arr.length;
         for (int i = 0; i < n; i++) {
-            int oi = random.nextInt(n), temp = a[oi];
+            int oi = random.nextInt(n), temp = arr[oi];
             arr[oi] = arr[i];
             arr[i] = temp;
         }

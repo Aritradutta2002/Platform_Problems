@@ -1,41 +1,31 @@
 package LeetCode_TestCases;
-
+import LeetCode_Problems.Leetcode2566_Maximum_Difference_by_Remapping_a_Digit;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Leetcode2566_Maximum_Difference_by_Remapping_a_Digit_Tests {
-
     @Test
-    void testMaximumDifference1() {
-        assertEquals(99009, Leetcode2566_Maximum_Difference_by_Remapping_a_Digit.maxDiff(11891));
+    void testcase1() {
+        assertEquals(8208, Leetcode2566_Maximum_Difference_by_Remapping_a_Digit.minMaxDifference(11891));
     }
 
     @Test
-    void testMaximumDifference2() {
-        assertEquals(99, Leetcode2566_Maximum_Difference_by_Remapping_a_Digit.maxDiff(90));
+    void testcase2() {
+        assertEquals(909, Leetcode2566_Maximum_Difference_by_Remapping_a_Digit.minMaxDifference(990));
     }
 
     @Test
-    void testMaximumDifference3() {
-        assertEquals(900, Leetcode2566_Maximum_Difference_by_Remapping_a_Digit.maxDiff(100));
+    void testcase3() {
+        assertEquals(900, Leetcode2566_Maximum_Difference_by_Remapping_a_Digit.minMaxDifference(909));
     }
 
     @Test
-    void testMaximumDifference4() {
-        assertEquals(9000, Leetcode2566_Maximum_Difference_by_Remapping_a_Digit.maxDiff(1000));
+    void testcase4() {
+        assertEquals(9, Leetcode2566_Maximum_Difference_by_Remapping_a_Digit.minMaxDifference(9));
     }
 
     @Test
-    void minMaxDifference1() {
-        int num = 11891;
-        int expected = 99009;
-        assertEquals(expected, Leetcode2566_Maximum_Difference_by_Remapping_a_Digit.maxDiff(num));
-    }
-
-    @Test
-    void minMaxDifference2() {
-        int num = 90;
-        int expected = 99;
-        assertEquals(expected, Leetcode2566_Maximum_Difference_by_Remapping_a_Digit.maxDiff(num));
+    void testcase5() {
+        assertEquals(8000, Leetcode2566_Maximum_Difference_by_Remapping_a_Digit.minMaxDifference(1000));
     }
 }

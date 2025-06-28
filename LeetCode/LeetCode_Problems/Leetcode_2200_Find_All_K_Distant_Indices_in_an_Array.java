@@ -27,7 +27,7 @@ public class Leetcode_2200_Find_All_K_Distant_Indices_in_an_Array {
     }
 
     public static List<Integer> findKDistantIndices(int[] nums, int key, int k) {
-
+        return new ArrayList<>();
     }
 
     static class FastIO extends PrintWriter {
