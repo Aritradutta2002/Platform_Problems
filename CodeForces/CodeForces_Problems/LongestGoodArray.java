@@ -1,4 +1,4 @@
-package CodeForces;
+package CodeForces_Problems;
 
 /*
  *   Author  : Aritra Dutta

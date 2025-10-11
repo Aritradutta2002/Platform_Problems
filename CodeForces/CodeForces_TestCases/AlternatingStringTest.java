@@ -1,4 +1,4 @@
-package CodeForces_Problems;
+package CodeForces_TestCases;
 
 import org.junit.jupiter.api.Test;
 

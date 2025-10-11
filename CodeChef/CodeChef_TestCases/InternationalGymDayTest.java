@@ -1,4 +1,4 @@
-package CodeChef_Problems;
+package CodeChef_TestCases;
 
 import org.junit.jupiter.api.Test;
 

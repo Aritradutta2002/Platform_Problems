@@ -1,4 +1,4 @@
-package CSESProblems_Problems;
+package CSESProblems_TestCases;
 
 import org.junit.jupiter.api.Test;
 

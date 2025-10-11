@@ -1,4 +1,4 @@
-package CodeForces;
+package CodeForces_Problems;
 /*
  *   Author  : Aritra Dutta
  *   Created : Sunday, 01.09.2024  09:24 pm

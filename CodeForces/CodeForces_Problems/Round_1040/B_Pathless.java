@@ -1,52 +1,71 @@
-package LeetCode_Problems;
+package CodeForces_Problems.Round_1040;
 
-import java.util.*;
-import java.lang.*;
-import java.math.*;
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.InputMismatchException;
 
-import static java.lang.Double.parseDouble;
-import static java.lang.System.in;
-import static java.lang.System.out;
+public class B_Pathless {
 
-/*
- *   Author : Aritra
- *   Created On: Monday,16.06.2025 11:57 pm
- */
-public class Leetcode_2016_Maximum_Difference_Between_Increasing_Elements {
     public static void main(String[] args) {
         FastIO sc = new FastIO();
-        int n = sc.nextInt();
-        int[] nums = sc.readIntArray(n);
-
-        out.println(maximumDifference(nums));
-        out.close();
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            solve(sc);
+        }
+        sc.close();
     }
 
-    /*
-    A_Submission_is_All_You_Need function to find the maximum difference between increasing elements in the array.
-     */
-        public static int maximumDifference(int[] nums) {
-            int min = nums[0];
-            int maxDiff = -1;
-            for (int i = 1; i < nums.length; i++) {
-                if (nums[i] > min) {
-                    maxDiff = Math.max(maxDiff, nums[i] - min);
-                } else {
-                    min = Math.min(min, nums[i]);
-                }
-            }
-            return maxDiff;
+    public static void solve(FastIO sc) {
+        int n = sc.nextInt();
+        int s = sc.nextInt();
+        int c0 = 0, c1 = 0, c2 = 0;
+        for (int i = 0; i < n; i++) {
+            int val = sc.nextInt();
+            if (val == 0) c0++;
+            else if (val == 1) c1++;
+            else c2++;
         }
+
+        long s_total = (long) c1 + (long)c2 * 2;
+
+        if (s < s_total) {
+            printBobWinArrangement(sc, c0, c1, c2);
+            return;
+        }
+
+        long k = s - s_total;
+
+
+        if (k > 1 && k % 2 != 0) {
+
+            printBobWinArrangement(sc, c0, c1, c2);
+        } else {
+
+            sc.println(-1);
+        }
+    }
+
+
+    private static void printBobWinArrangement(FastIO sc, int c0, int c1, int c2) {
+        for (int i = 0; i < c0; i++) sc.print("0 ");
+        for (int i = 0; i < c2; i++) sc.print("2 ");
+        for (int i = 0; i < c1; i++) sc.print("1 ");
+        sc.println();
+    }
 
 
     static class FastIO extends PrintWriter {
-        private InputStream stream;
-        private byte[] buf = new byte[1 << 16];
+        private final InputStream stream;
+        private final byte[] buf = new byte[1 << 16];
         private int curChar, numChars;
 
         public FastIO() {
-            this(in, System.out);
+            this(System.in, System.out);
         }
 
         public FastIO(InputStream i, OutputStream o) {
@@ -138,7 +157,7 @@ public class Leetcode_2016_Maximum_Difference_Between_Increasing_Elements {
         }
 
         public double nextDouble() {
-            return parseDouble(next());
+            return Double.parseDouble(next());
         }
 
         public int[] readIntArray(int n) {
@@ -149,5 +168,4 @@ public class Leetcode_2016_Maximum_Difference_Between_Increasing_Elements {
             return arr;
         }
     }
-
 }
