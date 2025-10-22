@@ -1,8 +1,7 @@
-package CodeForces.CodeForces_Problems;
-
+package CSES.CSES_Problems;
 /*
  *   Author  : Aritra Dutta
- *   Created : Monday, 02.09.2024  10:00 pm
+ *   Created : Saturday, 31.08.2024  02:17 am
  */
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,42 +11,66 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class CF_2010A {
+public class Appartments {
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         PrintWriter out = new PrintWriter(System.out);
-        int T = fs.nextInt();
-        while (T-- > 0) {
-            long n = fs.nextInt();
-            long[] arr = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                arr[i] = fs.nextInt();
-            }
-            int sum = 0;
-            for (int i = 0; i < n; i++) {
-                if (i % 2 == 0) {
-                    sum += arr[i];
-                } else {
-                    sum -= arr[i];
-                }
-            }
-            out.println(sum);
+        long n = fs.nextLong();
+        long m = fs.nextLong();
+        int k = fs.nextInt();
+        long[] nArr = new long[(int) n];
+        long[] mArr = new long[(int) m];
+        for (int i = 0; i < n; i++)
+            nArr[i] = fs.nextLong();
+        for (int i = 0; i < m; i++)
+            mArr[i] = fs.nextLong();
+        sort(nArr);
+        sort(mArr);
 
+        int count = 0;
+        int i = 0, j = 0;
+        while (i < n && j < m) {
+            if (Math.abs(nArr[i] - mArr[j]) <= k) {
+                count++;
+                i++;
+                j++;
+            } else if (nArr[i] < mArr[j]) {
+                i++;
+            } else {
+                j++;
+            }
         }
+        out.println(count);
+
         out.close();
     }
 
     static final Random random = new Random();
     static final int mod = 1_000_000_007;
 
-    static void ruffleSort(int[] a) {
-        int n = a.length;// shuffle, then sort
-        for (int i = 0; i < n; i++) {
-            int oi = random.nextInt(n), temp = a[oi];
-            a[oi] = a[i];
-            a[i] = temp;
+    private static boolean binarySearch(long[] arr, long key, long k) {
+        int left = 0, right = arr.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (abs(arr[mid] - key) <= k) {
+                return true;
+            } else if (arr[mid] < key) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
         }
-        Arrays.sort(a);
+        return false;
+    }
+
+    static void ruffleSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n; i++) {
+            int oi = random.nextInt(n), temp = arr[oi];
+            arr[oi] = arr[i];
+            arr[i] = temp;
+        }
+        Arrays.sort(arr);
     }
 
     public static long gcd(long a, long b) {
@@ -57,13 +80,6 @@ public class CF_2010A {
             a = temp;
         }
         return a;
-    }
-
-    public static void print(int[] arr) {
-        // for debugging only
-        for (int x : arr)
-            out.print(x + " ");
-        out.println();
     }
 
     public static long add(long a, long b) {
@@ -103,9 +119,9 @@ public class CF_2010A {
         return mul(factorials[n], mul(invFactorials[k], invFactorials[n - k]));
     }
 
-    public static void sort(int[] a) {
-        ArrayList<Integer> l = new ArrayList<>();
-        for (int i : a)
+    public static void sort(long[] a) {
+        ArrayList<Long> l = new ArrayList<>();
+        for (long i : a)
             l.add(i);
         Collections.sort(l);
         for (int i = 0; i < a.length; i++)

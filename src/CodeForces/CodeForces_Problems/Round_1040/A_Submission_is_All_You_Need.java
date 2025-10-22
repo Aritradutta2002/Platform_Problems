@@ -1,4 +1,4 @@
-package CodeForces_Problems.Round_1040;
+package CodeForces.CodeForces_Problems.Round_1040;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;

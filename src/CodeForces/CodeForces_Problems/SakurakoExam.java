@@ -1,4 +1,4 @@
-package CodeForces_Problems;
+package CodeForces.CodeForces_Problems;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.abs;

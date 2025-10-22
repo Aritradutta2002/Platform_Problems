@@ -1,4 +1,4 @@
-package AtCoder_Problems;
+package AtCoder.AtCoder_Problems;
 
 import java.util.*;
 

@@ -1,8 +1,7 @@
-package CodeForces.CodeForces_Problems;
-
+package CSES.CSES_Problems;
 /*
  *   Author  : Aritra Dutta
- *   Created : Monday, 02.09.2024  10:00 pm
+ *   Created : Monday, 09.12.2024  01:31 am
  */
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,33 +11,42 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class CF_2010A {
+public class CoinPiles {
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         PrintWriter out = new PrintWriter(System.out);
         int T = fs.nextInt();
         while (T-- > 0) {
-            long n = fs.nextInt();
-            long[] arr = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                arr[i] = fs.nextInt();
+           long A = fs.nextLong();
+           long B = fs.nextLong();
+
+
+
+            if ((2 * A - B) % 3 != 0 || (2 * A - B) < 0 ||
+                    (2 * B - A) % 3 != 0 || (2 * B - A) < 0) {
+                out.println("NO");
             }
-            int sum = 0;
-            for (int i = 0; i < n; i++) {
-                if (i % 2 == 0) {
-                    sum += arr[i];
-                } else {
-                    sum -= arr[i];
-                }
+            else {
+                out.println("YES");
             }
-            out.println(sum);
+
 
         }
         out.close();
     }
-
     static final Random random = new Random();
     static final int mod = 1_000_000_007;
+
+    public static boolean isPrime(long n) {
+        if(n < 2) return false;
+        if(n == 2 || n == 3) return true;
+        if(n%2 == 0 || n%3 == 0) return false;
+        long sqrtN = (long)Math.sqrt(n)+1;
+        for(long i = 6L; i <= sqrtN; i += 6) {
+            if(n%(i-1) == 0 || n%(i+1) == 0) return false;
+        }
+        return true;
+    }
 
     static void ruffleSort(int[] a) {
         int n = a.length;// shuffle, then sort
@@ -60,7 +68,7 @@ public class CF_2010A {
     }
 
     public static void print(int[] arr) {
-        // for debugging only
+        //for debugging only
         for (int x : arr)
             out.print(x + " ");
         out.println();
@@ -77,6 +85,22 @@ public class CF_2010A {
     static long mul(long a, long b) {
         return (a * b) % mod;
     }
+    static long calPow(long base, long exponent) {
+        if (exponent == 0) {
+            return 1;
+        }
+        if (exponent == 1) {
+            return base % mod;
+        }
+        long temp = calPow(base, exponent / 2);
+
+        if (exponent % 2 == 0) {
+            return (temp * temp) % mod;
+        } else {
+            return (((temp * temp) % mod) * base) % mod;
+        }
+    }
+
 
     public static long exp(long base, long exp) {
         if (exp == 0)
@@ -140,8 +164,7 @@ public class CF_2010A {
                 } catch (Exception e) {
                     return NC;
                 }
-                if (size == -1)
-                    return NC;
+                if (size == -1) return NC;
                 bId = 0;
             }
             return (char) buf[bId++];
@@ -170,11 +193,9 @@ public class CF_2010A {
         public long nextLong() {
             cnt = 1;
             boolean neg = false;
-            if (c == NC)
-                c = getChar();
+            if (c == NC) c = getChar();
             for (; (c < '0' || c > '9'); c = getChar()) {
-                if (c == '-')
-                    neg = true;
+                if (c == '-') neg = true;
             }
             long res = 0;
             for (; c >= '0' && c <= '9'; c = getChar()) {
@@ -199,8 +220,7 @@ public class CF_2010A {
 
         public String next() {
             StringBuilder res = new StringBuilder();
-            while (c <= 32)
-                c = getChar();
+            while (c <= 32) c = getChar();
             while (c > 32) {
                 res.append(c);
                 c = getChar();
@@ -210,8 +230,7 @@ public class CF_2010A {
 
         public String nextLine() {
             StringBuilder res = new StringBuilder();
-            while (c <= 32)
-                c = getChar();
+            while (c <= 32) c = getChar();
             while (c != '\n') {
                 res.append(c);
                 c = getChar();
@@ -220,14 +239,11 @@ public class CF_2010A {
         }
 
         public boolean hasNext() {
-            if (c > 32)
-                return true;
+            if (c > 32) return true;
             while (true) {
                 c = getChar();
-                if (c == NC)
-                    return false;
-                else if (c > 32)
-                    return true;
+                if (c == NC) return false;
+                else if (c > 32) return true;
             }
         }
     }

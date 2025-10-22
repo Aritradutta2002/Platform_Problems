@@ -1,50 +1,53 @@
-package CodeForces.CodeForces_Problems;
+package CSES.CSES_Problems;
 
-/*
- *   Author  : Aritra Dutta
- *   Created : Friday, 30.08.2024  09:58 pm
- */
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-import static java.lang.Math.abs;
-import static java.lang.System.out;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.*;
-import java.math.*;
 
-public class C {
-    public static void main(String[] args) throws IOException {
+public class PalindromeReorder {
+    public static void main(String[] args) {
         FastScanner fs = new FastScanner();
-        StringBuilder result = new StringBuilder();
         PrintWriter out = new PrintWriter(System.out);
-        int T = fs.nextInt();
-        while (T-- > 0) {
-            long n = fs.nextLong();
-            long a = fs.nextLong();
-            long b = fs.nextLong();
-
-            long[] c = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                c[i] = fs.nextLong();
-            }
-            long g = gcd(a, b);
-
-            long[] d = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                d[i] = c[i] % g;
-            }
-
-            Arrays.sort(d);
-
-            long range = d[(int) (n - 1)] - d[0];
-
-            range = Math.min(range, g - range);
-
-            result.append(range).append("\n");
-        }
-        System.out.print(result.toString());
+        String str = fs.next();
+        out.println(solve(str));
         out.close();
+    }
 
+    static String solve(String S) {
+        int N = S.length();
+        char[] ans = new char[N];
+
+        int[] freq = new int[26];
+        for (int i = 0; i < N; i++) {
+            freq[S.charAt(i) - 'A'] += 1;
+        }
+
+        int cnt = 0;
+        for (int i = 0; i < 26; i++) {
+            if (freq[i] % 2 != 0) {
+                cnt += 1;
+            }
+        }
+
+        if (cnt > 1)
+            return "NO SOLUTION";
+
+        int left = 0, right = N - 1;
+        for (int i = 0; i < 26; i++) {
+            while (freq[i] > 1) {
+                ans[left++] = ans[right--] = (char) ('A' + i);
+                freq[i] -= 2;
+            }
+        }
+        for (int i = 0; i < 26; i++) {
+            if (freq[i] == 1) {
+                ans[N / 2] = (char) ('A' + i);
+                break;
+            }
+        }
+        return new String(ans);
     }
 
     static final Random random = new Random();
@@ -58,22 +61,6 @@ public class C {
             a[i] = temp;
         }
         Arrays.sort(a);
-    }
-
-    static long gcd(long a, long b) {
-        while (b != 0) {
-            long temp = b;
-            b = a % b;
-            a = temp;
-        }
-        return a;
-    }
-
-    public static void print(int[] arr) {
-        // for debugging only
-        for (int x : arr)
-            out.print(x + " ");
-        out.println();
     }
 
     static long add(long a, long b) {

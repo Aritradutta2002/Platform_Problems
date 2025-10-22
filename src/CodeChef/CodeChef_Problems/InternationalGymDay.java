@@ -1,4 +1,4 @@
-package CodeChef_Problems;
+package CodeChef.CodeChef_Problems;
 /*
  *   Author  : Aritra Dutta
  *   Created : Wednesday, 11.09.2024  08:14 pm

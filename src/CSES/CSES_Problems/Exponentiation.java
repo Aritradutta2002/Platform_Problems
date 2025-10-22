@@ -1,8 +1,8 @@
-package CodeForces.CodeForces_Problems;
+package CSES.CSES_Problems;
 
 /*
  *   Author  : Aritra Dutta
- *   Created : Monday, 02.09.2024  10:00 pm
+ *   Created : Sunday, 01.09.2024  02:00 am
  */
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,36 +12,41 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class CF_2010A {
+public class Exponentiation {
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         PrintWriter out = new PrintWriter(System.out);
-        int T = fs.nextInt();
+        long T = fs.nextInt();
         while (T-- > 0) {
-            long n = fs.nextInt();
-            long[] arr = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                arr[i] = fs.nextInt();
-            }
-            int sum = 0;
-            for (int i = 0; i < n; i++) {
-                if (i % 2 == 0) {
-                    sum += arr[i];
-                } else {
-                    sum -= arr[i];
-                }
-            }
-            out.println(sum);
-
+            long a = fs.nextLong();
+            long b = fs.nextLong();
+            long ans = exp(a, b);
+            out.println(ans);
         }
         out.close();
+    }
+
+    static long calPow(long base, long exponent) {
+        if (exponent == 0) {
+            return 1;
+        }
+        if (exponent == 1) {
+            return base % mod;
+        }
+        long temp = calPow(base, exponent / 2);
+
+        if (exponent % 2 == 0) {
+            return (temp * temp) % mod;
+        } else {
+            return (((temp * temp) % mod) * base) % mod;
+        }
     }
 
     static final Random random = new Random();
     static final int mod = 1_000_000_007;
 
     static void ruffleSort(int[] a) {
-        int n = a.length;// shuffle, then sort
+        int n = a.length;
         for (int i = 0; i < n; i++) {
             int oi = random.nextInt(n), temp = a[oi];
             a[oi] = a[i];
@@ -57,13 +62,6 @@ public class CF_2010A {
             a = temp;
         }
         return a;
-    }
-
-    public static void print(int[] arr) {
-        // for debugging only
-        for (int x : arr)
-            out.print(x + " ");
-        out.println();
     }
 
     public static long add(long a, long b) {

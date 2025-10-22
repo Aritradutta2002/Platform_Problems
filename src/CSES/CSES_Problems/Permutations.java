@@ -1,50 +1,37 @@
-package CodeForces.CodeForces_Problems;
+package CSES.CSES_Problems;
 
-/*
- *   Author  : Aritra Dutta
- *   Created : Friday, 30.08.2024  09:58 pm
- */
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-import static java.lang.Math.abs;
-import static java.lang.System.out;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.*;
-import java.math.*;
 
-public class C {
-    public static void main(String[] args) throws IOException {
+public class Permutations {
+    public static void main(String[] args) {
         FastScanner fs = new FastScanner();
-        StringBuilder result = new StringBuilder();
         PrintWriter out = new PrintWriter(System.out);
-        int T = fs.nextInt();
-        while (T-- > 0) {
-            long n = fs.nextLong();
-            long a = fs.nextLong();
-            long b = fs.nextLong();
+        int n = fs.nextInt();
 
-            long[] c = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                c[i] = fs.nextLong();
-            }
-            long g = gcd(a, b);
-
-            long[] d = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                d[i] = c[i] % g;
-            }
-
-            Arrays.sort(d);
-
-            long range = d[(int) (n - 1)] - d[0];
-
-            range = Math.min(range, g - range);
-
-            result.append(range).append("\n");
+        if (n == 2 || n == 3) {
+            out.println("NO SOLUTION");
         }
-        System.out.print(result.toString());
-        out.close();
 
+        else if (n % 2 == 0) {
+            for (int i = 2; i <= n; i += 2) {
+                out.print(i + " ");
+            }
+            for (int i = 1; i < n; i += 2) {
+                out.print(i + " ");
+            }
+        } else {
+            for (int i = n - 1; i > 0; i -= 2) {
+                out.print(i + " ");
+            }
+            for (int i = n; i > 0; i -= 2) {
+                out.print(i + " ");
+            }
+        }
+        out.close();
     }
 
     static final Random random = new Random();
@@ -58,22 +45,6 @@ public class C {
             a[i] = temp;
         }
         Arrays.sort(a);
-    }
-
-    static long gcd(long a, long b) {
-        while (b != 0) {
-            long temp = b;
-            b = a % b;
-            a = temp;
-        }
-        return a;
-    }
-
-    public static void print(int[] arr) {
-        // for debugging only
-        for (int x : arr)
-            out.print(x + " ");
-        out.println();
     }
 
     static long add(long a, long b) {

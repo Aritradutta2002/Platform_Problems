@@ -1,8 +1,8 @@
-package CodeForces.CodeForces_Problems;
+package CSES.CSES_Problems;
 
 /*
  *   Author  : Aritra Dutta
- *   Created : Monday, 02.09.2024  10:00 pm
+ *   Created : Saturday, 31.08.2024  02:14 am
  */
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,28 +12,18 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class CF_2010A {
+public class DistinctNumbers {
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         PrintWriter out = new PrintWriter(System.out);
-        int T = fs.nextInt();
-        while (T-- > 0) {
-            long n = fs.nextInt();
-            long[] arr = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                arr[i] = fs.nextInt();
-            }
-            int sum = 0;
-            for (int i = 0; i < n; i++) {
-                if (i % 2 == 0) {
-                    sum += arr[i];
-                } else {
-                    sum -= arr[i];
-                }
-            }
-            out.println(sum);
-
-        }
+        int n = fs.nextInt();
+        long[] arr = new long[n];
+        for (int i = 0; i < n; i++)
+            arr[i] = fs.nextLong();
+        Set<Long> set = new HashSet<>();
+        for (int i = 0; i < n; i++)
+            set.add(arr[i]);
+        System.out.println(set.size());
         out.close();
     }
 

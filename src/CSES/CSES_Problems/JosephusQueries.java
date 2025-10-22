@@ -1,8 +1,8 @@
-package CodeForces.CodeForces_Problems;
+package CSES.CSES_Problems;
 
 /*
  *   Author  : Aritra Dutta
- *   Created : Monday, 02.09.2024  10:00 pm
+ *   Created : Sunday, 01.09.2024  12:37 am
  */
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,29 +12,28 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class CF_2010A {
+public class JosephusQueries {
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         PrintWriter out = new PrintWriter(System.out);
         int T = fs.nextInt();
         while (T-- > 0) {
             long n = fs.nextInt();
-            long[] arr = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                arr[i] = fs.nextInt();
-            }
-            int sum = 0;
-            for (int i = 0; i < n; i++) {
-                if (i % 2 == 0) {
-                    sum += arr[i];
-                } else {
-                    sum -= arr[i];
-                }
-            }
-            out.println(sum);
-
+            long k = fs.nextInt();
+            int t = 1;
+            long res = Josephus(n, k, 0, 1, 0);
+            out.println(res);
         }
+
         out.close();
+    }
+
+    static long Josephus(long n, long k, long first, long multi, long add) {
+        long tot = n / 2 + (n & first & 1);
+        if (k <= tot)
+            return (k + k - first) * multi + add;
+        else
+            return Josephus((n + 1 - first) / 2, k - tot, first ^ (n & 1), multi * 2, add + multi * first - multi);
     }
 
     static final Random random = new Random();
@@ -57,13 +56,6 @@ public class CF_2010A {
             a = temp;
         }
         return a;
-    }
-
-    public static void print(int[] arr) {
-        // for debugging only
-        for (int x : arr)
-            out.print(x + " ");
-        out.println();
     }
 
     public static long add(long a, long b) {

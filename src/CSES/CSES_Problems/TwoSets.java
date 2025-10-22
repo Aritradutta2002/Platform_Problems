@@ -1,8 +1,8 @@
-package CodeForces.CodeForces_Problems;
+package CSES.CSES_Problems;
 
 /*
  *   Author  : Aritra Dutta
- *   Created : Monday, 02.09.2024  10:00 pm
+ *   Created : Thursday, 05.09.2024  12:55 am
  */
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,33 +12,65 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class CF_2010A {
+public class TwoSets {
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         PrintWriter out = new PrintWriter(System.out);
-        int T = fs.nextInt();
-        while (T-- > 0) {
-            long n = fs.nextInt();
-            long[] arr = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                arr[i] = fs.nextInt();
-            }
-            int sum = 0;
-            for (int i = 0; i < n; i++) {
-                if (i % 2 == 0) {
-                    sum += arr[i];
+
+        long n = fs.nextLong();
+        long totalSum = n * (n + 1) / 2;
+
+        if (totalSum % 2 != 0) {
+            System.out.println("NO");
+            return;
+        } else {
+            out.println("YES");
+            List<Long> set1 = new ArrayList<>();
+            List<Long> set2 = new ArrayList<>();
+            long targetSum = totalSum / 2;
+
+            for (long i = n; i >= 1; i--) {
+                if (i <= targetSum) {
+                    set1.add(i);
+                    targetSum -= i;
                 } else {
-                    sum -= arr[i];
+                    set2.add(i);
                 }
             }
-            out.println(sum);
 
+            out.println(set1.size());
+            for (long num : set1) {
+                out.print(num + " ");
+            }
+            out.println();
+
+            out.println(set2.size());
+            for (long num : set2) {
+                out.print(num + " ");
+            }
         }
+
+        out.flush();
         out.close();
     }
 
     static final Random random = new Random();
     static final int mod = 1_000_000_007;
+
+    public static boolean isPrime(long n) {
+        if (n < 2)
+            return false;
+        if (n == 2 || n == 3)
+            return true;
+        if (n % 2 == 0 || n % 3 == 0)
+            return false;
+        long sqrtN = (long) Math.sqrt(n) + 1;
+        for (long i = 6L; i <= sqrtN; i += 6) {
+            if (n % (i - 1) == 0 || n % (i + 1) == 0)
+                return false;
+        }
+        return true;
+    }
 
     static void ruffleSort(int[] a) {
         int n = a.length;// shuffle, then sort
@@ -59,11 +91,11 @@ public class CF_2010A {
         return a;
     }
 
-    public static void print(int[] arr) {
+    public static void print(long[] arr, long start, long end) {
         // for debugging only
-        for (int x : arr)
-            out.print(x + " ");
-        out.println();
+        for (long i = start; i <= end; i++)
+            System.out.print(arr[(int) i] + " ");
+        System.out.println();
     }
 
     public static long add(long a, long b) {

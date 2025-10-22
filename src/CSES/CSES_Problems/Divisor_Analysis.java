@@ -1,8 +1,8 @@
-package CodeForces.CodeForces_Problems;
+package CSES.CSES_Problems;
 
 /*
  *   Author  : Aritra Dutta
- *   Created : Monday, 02.09.2024  10:00 pm
+ *   Created : Sunday, 13.10.2024  07:35 pm
  */
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,33 +12,53 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class CF_2010A {
+public class Divisor_Analysis {
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         PrintWriter out = new PrintWriter(System.out);
         int T = fs.nextInt();
         while (T-- > 0) {
-            long n = fs.nextInt();
-            long[] arr = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                arr[i] = fs.nextInt();
-            }
-            int sum = 0;
-            for (int i = 0; i < n; i++) {
-                if (i % 2 == 0) {
-                    sum += arr[i];
-                } else {
-                    sum -= arr[i];
-                }
+            long x = fs.nextLong();
+            long exp1 = fs.nextLong();
+
+            long y = fs.nextLong();
+            long exp2 = fs.nextLong();
+
+            long n = calPow(x, exp1) * calPow(y, exp2);
+            long sum = 0;
+
+            for (long i = 1; i <= n; ++i) {
+                long r = n / (n / i);
+                sum += (n / i) % mod * (sigma(r) - sigma(i - 1) + mod) % mod;
+                sum = (sum + mod) % mod;
+                i = r;
             }
             out.println(sum);
-
         }
         out.close();
     }
 
+    static long sigma(long x) {
+        return ((x % mod) * ((x + 1) % mod) / 2) % mod;
+    }
+
     static final Random random = new Random();
     static final int mod = 1_000_000_007;
+
+    public static boolean isPrime(long n) {
+        if (n < 2)
+            return false;
+        if (n == 2 || n == 3)
+            return true;
+        if (n % 2 == 0 || n % 3 == 0)
+            return false;
+        long sqrtN = (long) Math.sqrt(n) + 1;
+        for (long i = 6L; i <= sqrtN; i += 6) {
+            if (n % (i - 1) == 0 || n % (i + 1) == 0)
+                return false;
+        }
+        return true;
+    }
 
     static void ruffleSort(int[] a) {
         int n = a.length;// shuffle, then sort
@@ -76,6 +96,22 @@ public class CF_2010A {
 
     static long mul(long a, long b) {
         return (a * b) % mod;
+    }
+
+    static long calPow(long base, long exponent) {
+        if (exponent == 0) {
+            return 1;
+        }
+        if (exponent == 1) {
+            return base % mod;
+        }
+        long temp = calPow(base, exponent / 2);
+
+        if (exponent % 2 == 0) {
+            return (temp * temp) % mod;
+        } else {
+            return (((temp * temp) % mod) * base) % mod;
+        }
     }
 
     public static long exp(long base, long exp) {

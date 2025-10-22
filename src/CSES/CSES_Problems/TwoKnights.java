@@ -1,8 +1,8 @@
-package CodeForces.CodeForces_Problems;
+package CSES.CSES_Problems;
 
 /*
  *   Author  : Aritra Dutta
- *   Created : Monday, 02.09.2024  10:00 pm
+ *   Created : Thursday, 05.09.2024  12:18 am
  */
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,33 +12,42 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class CF_2010A {
+public class TwoKnights {
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         PrintWriter out = new PrintWriter(System.out);
-        int T = fs.nextInt();
-        while (T-- > 0) {
-            long n = fs.nextInt();
-            long[] arr = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                arr[i] = fs.nextInt();
-            }
-            int sum = 0;
-            for (int i = 0; i < n; i++) {
-                if (i % 2 == 0) {
-                    sum += arr[i];
-                } else {
-                    sum -= arr[i];
-                }
-            }
-            out.println(sum);
-
+        long n = fs.nextInt();
+        for (long i = 1; i <= n; ++i) {
+            System.out.println(calculateWays(i));
         }
-        out.close();
+    }
+
+    public static long calculateWays(long k) {
+        if (k == 1)
+            return 0;
+        long totalWays = (k * k * (k * k - 1)) / 2;
+        long attackingWays = 4 * (k - 1) * (k - 2);
+
+        return totalWays - attackingWays;
     }
 
     static final Random random = new Random();
     static final int mod = 1_000_000_007;
+
+    public static boolean isPrime(long n) {
+        if (n < 2)
+            return false;
+        if (n == 2 || n == 3)
+            return true;
+        if (n % 2 == 0 || n % 3 == 0)
+            return false;
+        long sqrtN = (long) Math.sqrt(n) + 1;
+        for (long i = 6L; i <= sqrtN; i += 6) {
+            if (n % (i - 1) == 0 || n % (i + 1) == 0)
+                return false;
+        }
+        return true;
+    }
 
     static void ruffleSort(int[] a) {
         int n = a.length;// shuffle, then sort

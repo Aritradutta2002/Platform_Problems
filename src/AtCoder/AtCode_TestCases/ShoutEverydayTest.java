@@ -1,4 +1,4 @@
-package AtCode_TestCases;
+package AtCoder.AtCode_TestCases;
 
 import org.junit.jupiter.api.Test;
 

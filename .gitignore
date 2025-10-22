@@ -6,4 +6,21 @@
 *.class
 
 # Ignore output directory
+/out/
 
+# Maven / build output
+/target/
+
+# IDE and editor dirs
+/.idea/
+.vscode/
+
+# Common
+.DS_Store
+*.log
+.gradle/
+.settings/
+
+# Bundles
+*.jar
+*.war

@@ -1,50 +1,40 @@
-package CodeForces.CodeForces_Problems;
+package CSES.CSES_Problems;
 
-/*
- *   Author  : Aritra Dutta
- *   Created : Friday, 30.08.2024  09:58 pm
- */
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-import static java.lang.Math.abs;
-import static java.lang.System.out;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.*;
-import java.math.*;
 
-public class C {
-    public static void main(String[] args) throws IOException {
+public class SumTwoValues {
+    public static void main(String[] args) {
         FastScanner fs = new FastScanner();
-        StringBuilder result = new StringBuilder();
         PrintWriter out = new PrintWriter(System.out);
-        int T = fs.nextInt();
-        while (T-- > 0) {
-            long n = fs.nextLong();
-            long a = fs.nextLong();
-            long b = fs.nextLong();
-
-            long[] c = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                c[i] = fs.nextLong();
-            }
-            long g = gcd(a, b);
-
-            long[] d = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                d[i] = c[i] % g;
-            }
-
-            Arrays.sort(d);
-
-            long range = d[(int) (n - 1)] - d[0];
-
-            range = Math.min(range, g - range);
-
-            result.append(range).append("\n");
+        int n = fs.nextInt();
+        int target = fs.nextInt();
+        long[] arr = new long[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = fs.nextLong();
         }
-        System.out.print(result.toString());
-        out.close();
+        int[] ans = { 0, 0 };
+        HashMap<Long, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            long curr = arr[i];
+            long remaining = target - curr;
+            if (map.containsKey(remaining)) {
+                ans[0] = map.get(remaining) + 1;
+                ans[1] = i + 1;
+                break;
+            }
+            map.put(arr[i], i);
+        }
 
+        if (ans[0] == 0 && ans[1] == 0) {
+            System.out.println("IMPOSSIBLE");
+        } else {
+            System.out.println(ans[0] + " " + ans[1]);
+        }
+        out.close();
     }
 
     static final Random random = new Random();
@@ -58,22 +48,6 @@ public class C {
             a[i] = temp;
         }
         Arrays.sort(a);
-    }
-
-    static long gcd(long a, long b) {
-        while (b != 0) {
-            long temp = b;
-            b = a % b;
-            a = temp;
-        }
-        return a;
-    }
-
-    public static void print(int[] arr) {
-        // for debugging only
-        for (int x : arr)
-            out.print(x + " ");
-        out.println();
     }
 
     static long add(long a, long b) {

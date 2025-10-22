@@ -1,8 +1,8 @@
-package CodeForces.CodeForces_Problems;
+package CSES.CSES_Problems;
 
 /*
  *   Author  : Aritra Dutta
- *   Created : Monday, 02.09.2024  10:00 pm
+ *   Created : Saturday, 31.08.2024  03:00 am
  */
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,33 +12,29 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class CF_2010A {
+public class SumOfDivisors {
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         PrintWriter out = new PrintWriter(System.out);
-        int T = fs.nextInt();
-        while (T-- > 0) {
-            long n = fs.nextInt();
-            long[] arr = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                arr[i] = fs.nextInt();
-            }
-            int sum = 0;
-            for (int i = 0; i < n; i++) {
-                if (i % 2 == 0) {
-                    sum += arr[i];
-                } else {
-                    sum -= arr[i];
-                }
-            }
-            out.println(sum);
-
+        long n = fs.nextLong();
+        long sum = 0;
+        for (long i = 1; i <= n; ++i) {
+            long r = n / (n / i);
+            sum += (n / i) % mod * (sigma(r) - sigma(i - 1) + mod) % mod;
+            sum = (sum + mod) % mod;
+            i = r;
         }
+        out.println(sum);
         out.close();
+    }
+
+    static long sigma(long x) {
+        return ((x % mod) * ((x + 1) % mod) / 2) % mod;
     }
 
     static final Random random = new Random();
     static final int mod = 1_000_000_007;
+    static final int TWO_MOD_INV = 500000004;
 
     static void ruffleSort(int[] a) {
         int n = a.length;// shuffle, then sort

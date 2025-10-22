@@ -1,8 +1,8 @@
-package CodeForces.CodeForces_Problems;
+package CSES.CSES_Problems;
 
 /*
  *   Author  : Aritra Dutta
- *   Created : Monday, 02.09.2024  10:00 pm
+ *   Created : Monday, 02.09.2024  05:37 pm
  */
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,29 +12,44 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class CF_2010A {
+public class TrailingZeros {
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         PrintWriter out = new PrintWriter(System.out);
-        int T = fs.nextInt();
-        while (T-- > 0) {
-            long n = fs.nextInt();
-            long[] arr = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                arr[i] = fs.nextInt();
-            }
-            int sum = 0;
-            for (int i = 0; i < n; i++) {
-                if (i % 2 == 0) {
-                    sum += arr[i];
-                } else {
-                    sum -= arr[i];
-                }
-            }
-            out.println(sum);
+        long n = fs.nextLong();
 
-        }
+        out.println(findTrailingZeros(n));
         out.close();
+    }
+
+    static long findTrailingZeros(long n) {
+        if (n < 0)
+            return -1;
+
+        long count = 0;
+
+        for (int i = 5; n / i >= 1; i *= 5)
+            count += n / i;
+
+        return count;
+    }
+
+    static long countFives(long n) {
+        long count = 0;
+        while (n % 5 == 0) {
+            count++;
+            n /= 5;
+        }
+        return count;
+    }
+
+    static long countTwos(long n) {
+        long count = 0;
+        while (n % 2 == 0) {
+            count++;
+            n /= 2;
+        }
+        return count;
     }
 
     static final Random random = new Random();

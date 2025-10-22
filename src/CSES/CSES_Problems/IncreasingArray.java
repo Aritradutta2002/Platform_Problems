@@ -1,8 +1,8 @@
-package CodeForces.CodeForces_Problems;
+package CSES.CSES_Problems;
 
 /*
  *   Author  : Aritra Dutta
- *   Created : Friday, 30.08.2024  09:58 pm
+ *   Created : Friday, 30.08.2024  07:13 pm
  */
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -12,39 +12,30 @@ import java.io.*;
 import java.util.*;
 import java.math.*;
 
-public class C {
-    public static void main(String[] args) throws IOException {
+public class IncreasingArray {
+    public static void main(String[] args) {
         FastScanner fs = new FastScanner();
-        StringBuilder result = new StringBuilder();
         PrintWriter out = new PrintWriter(System.out);
-        int T = fs.nextInt();
-        while (T-- > 0) {
-            long n = fs.nextLong();
-            long a = fs.nextLong();
-            long b = fs.nextLong();
-
-            long[] c = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                c[i] = fs.nextLong();
+        int n = fs.nextInt();
+        long[] arr = new long[n];
+        for (int i = 0; i < n; i++)
+            arr[i] = fs.nextLong();
+        long count = 0;
+        for (int i = 1; i < n; i++) {
+            if (arr[i] < arr[i - 1]) {
+                long temp = abs(arr[i] - arr[i - 1]);
+                count += temp;
+                arr[i] += temp;
             }
-            long g = gcd(a, b);
-
-            long[] d = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                d[i] = c[i] % g;
-            }
-
-            Arrays.sort(d);
-
-            long range = d[(int) (n - 1)] - d[0];
-
-            range = Math.min(range, g - range);
-
-            result.append(range).append("\n");
         }
-        System.out.print(result.toString());
+        out.println(count);
         out.close();
+    }
 
+    static void swap(long[] arr, int i, int j) {
+        long temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
     static final Random random = new Random();
@@ -58,15 +49,6 @@ public class C {
             a[i] = temp;
         }
         Arrays.sort(a);
-    }
-
-    static long gcd(long a, long b) {
-        while (b != 0) {
-            long temp = b;
-            b = a % b;
-            a = temp;
-        }
-        return a;
     }
 
     public static void print(int[] arr) {
