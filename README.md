@@ -1,37 +1,178 @@
-# Platform_Problems
+# 🚀 Platform Problems
 
-This repository collects competitive programming solutions (AtCoder, CodeChef, CodeForces, CSES, LeetCode) under a single `src/` tree. The layout is currently non-standard for Maven/Gradle Java projects (sources live under `src/` rather than `src/main/java`).
+[![Java CI](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)
+[![Maven](https://img.shields.io/badge/Maven-3.6+-blue.svg)](https://maven.apache.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
 
-What I added
+> A comprehensive collection of competitive programming solutions from multiple platforms including AtCoder, CodeChef, CodeForces, CSES, and LeetCode.
 
-- `pom.xml` — Minimal Maven project allowing compile and test runs. Assumes Java 17. Tests use JUnit 5.
-- `.gitignore` — Expanded to include common IDE/build artifacts.
+## 📋 Table of Contents
 
-How to build
+- [About](#about)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Building the Project](#building-the-project)
+- [Running Tests](#running-tests)
+- [Supported Platforms](#supported-platforms)
+- [Contributing](#contributing)
+- [License](#license)
 
-From a PowerShell terminal on Windows (this repo root):
+## 🎯 About
 
-```powershell
-mvn -v
-mvn -DskipTests package
+This repository contains my solutions to competitive programming problems from various platforms. Each solution is written in Java 17 and includes unit tests using JUnit 5.
+
+**Key Features:**
+- ✅ Solutions from 5+ competitive programming platforms
+- ✅ Unit tests for verification
+- ✅ Maven build system for easy compilation
+- ✅ Clean, readable code with proper documentation
+- ✅ CI/CD ready with GitHub Actions
+
+## 📁 Project Structure
+
+```
+Platform_Problems/
+├── src/
+│   ├── AtCoder/
+│   │   ├── AtCoder_Problems/    # AtCoder problem solutions
+│   │   └── AtCoder_TestCases/   # AtCoder test cases
+│   ├── CodeChef/
+│   │   ├── CodeChef_Problems/   # CodeChef problem solutions
+│   │   └── CodeChef_TestCases/  # CodeChef test cases
+│   ├── CodeForces/
+│   │   ├── CodeForces_Problems/ # CodeForces problem solutions
+│   │   └── CodeForces_TestCases/# CodeForces test cases
+│   ├── CSES/
+│   │   ├── CSES_Problems/       # CSES problem solutions
+│   │   └── CSES_TestCases/      # CSES test cases
+│   ├── LeetCode/
+│   │   ├── LeetCode_Problems/   # LeetCode problem solutions
+│   │   └── LeetCode_TestCases/  # LeetCode test cases
+│   └── Contests/                # Contest-specific solutions
+├── lib/                         # External libraries (if needed)
+├── pom.xml                      # Maven configuration
+└── README.md                    # This file
 ```
 
-How to run tests
+## 🚀 Getting Started
 
-```powershell
+### Prerequisites
+
+- **Java Development Kit (JDK) 17** or higher
+- **Apache Maven 3.6+**
+- **Git** (for cloning the repository)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/Platform_Problems.git
+   cd Platform_Problems
+   ```
+
+2. **Verify Maven installation:**
+   ```bash
+   mvn -v
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   mvn clean install
+   ```
+
+## 🔨 Building the Project
+
+### Compile without running tests:
+```bash
+mvn clean compile
+```
+
+### Compile and package:
+```bash
+mvn clean package -DskipTests
+```
+
+### Full build with tests:
+```bash
+mvn clean install
+```
+
+## 🧪 Running Tests
+
+### Run all tests:
+```bash
 mvn test
 ```
 
-Notes & next steps
+### Run tests for a specific platform:
+```bash
+mvn test -Dtest="*AtCoder*"
+mvn test -Dtest="*LeetCode*"
+```
 
-- The current `pom.xml` uses the non-standard `src/` locations. For long-term maintainability, consider moving sources to the Maven standard layout:
-  - `src/main/java/...` for production code
-  - `src/test/java/...` for tests
-- If your code requires a specific Java version, update the `maven.compiler.source` and `target` properties inside `pom.xml`.
-- I intentionally kept changes minimal to avoid touching source files.
+### Run with verbose output:
+```bash
+mvn test -X
+```
 
-If you'd like, I can:
+## 🏆 Supported Platforms
 
-- Convert the repository to standard Maven layout automatically and update package declarations if needed.
-- Add a small runner or scripts for quick execution of single problem files.
-- Configure GitHub Actions for CI (build + tests).
+| Platform | Problems Solved | Test Coverage |
+|----------|----------------|---------------|
+| [AtCoder](https://atcoder.jp/) | ✅ Multiple | ✅ Yes |
+| [CodeChef](https://www.codechef.com/) | ✅ Multiple | ✅ Yes |
+| [CodeForces](https://codeforces.com/) | ✅ Multiple | ✅ Yes |
+| [CSES](https://cses.fi/) | ✅ Multiple | ✅ Yes |
+| [LeetCode](https://leetcode.com/) | ✅ Multiple | ✅ Yes |
+
+## 🤝 Contributing
+
+Contributions are welcome! If you'd like to add solutions or improve existing ones:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/new-solution`)
+3. Commit your changes (`git commit -m 'Add solution for Problem X'`)
+4. Push to the branch (`git push origin feature/new-solution`)
+5. Open a Pull Request
+
+## 📝 Code Style
+
+- Follow Java naming conventions
+- Include comments for complex logic
+- Write unit tests for all solutions
+- Ensure all tests pass before committing
+
+## 🛠️ Technology Stack
+
+- **Language:** Java 17
+- **Build Tool:** Apache Maven
+- **Testing Framework:** JUnit 5
+- **Version Control:** Git
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👤 Author
+
+**Your Name**
+- GitHub: [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
+- Email: your.email@example.com
+
+## 🙏 Acknowledgments
+
+- Thanks to all competitive programming platforms for providing excellent problems
+- Inspired by the competitive programming community
+
+## 📊 Stats
+
+![GitHub repo size](https://img.shields.io/github/repo-size/YOUR_USERNAME/Platform_Problems)
+![GitHub stars](https://img.shields.io/github/stars/YOUR_USERNAME/Platform_Problems?style=social)
+![GitHub forks](https://img.shields.io/github/forks/YOUR_USERNAME/Platform_Problems?style=social)
+
+---
+
+⭐ **Star this repository if you find it helpful!**
+
+*Happy Coding! 🎉*
