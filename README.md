@@ -67,7 +67,7 @@ Platform_Problems/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/Platform_Problems.git
+   git clone https://github.com/aritradutta/Platform_Problems.git
    cd Platform_Problems
    ```
 
@@ -156,9 +156,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👤 Author
 
-**Your Name**
-- GitHub: [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
-- Email: your.email@example.com
+**Aritra Dutta**
+- GitHub: [@aritradutta](https://github.com/aritradutta)
+- Email: aritradutta049@gmail.com
 
 ## 🙏 Acknowledgments
 
@@ -167,9 +167,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📊 Stats
 
-![GitHub repo size](https://img.shields.io/github/repo-size/YOUR_USERNAME/Platform_Problems)
-![GitHub stars](https://img.shields.io/github/stars/YOUR_USERNAME/Platform_Problems?style=social)
-![GitHub forks](https://img.shields.io/github/forks/YOUR_USERNAME/Platform_Problems?style=social)
+![GitHub repo size](https://img.shields.io/github/repo-size/aritradutta/Platform_Problems)
+![GitHub stars](https://img.shields.io/github/stars/aritradutta/Platform_Problems?style=social)
+![GitHub forks](https://img.shields.io/github/forks/aritradutta/Platform_Problems?style=social)
 
 ---
 

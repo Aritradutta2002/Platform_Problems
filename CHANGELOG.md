@@ -35,5 +35,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Maven POM configuration for Java 17
 - Basic .gitignore file
 
-[Unreleased]: https://github.com/YOUR_USERNAME/Platform_Problems/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/YOUR_USERNAME/Platform_Problems/releases/tag/v0.1.0
+[Unreleased]: https://github.com/aritradutta/Platform_Problems/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/aritradutta/Platform_Problems/releases/tag/v0.1.0
