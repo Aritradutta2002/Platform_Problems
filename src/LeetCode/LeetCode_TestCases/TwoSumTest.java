@@ -13,7 +13,6 @@ public class TwoSumTest {
         int[] result = Leetcode_01_Two_Sum.twoSum(nums, target);
         assertArrayEquals(expected, result);
     }
-
     @Test
     public void testTwoSumDifferentTarget() {
         int[] nums = {3, 2, 4};
