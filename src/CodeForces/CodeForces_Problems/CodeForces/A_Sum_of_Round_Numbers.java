@@ -28,14 +28,22 @@ public class A_Sum_of_Round_Numbers {
     }
     
     static void solve(int t) throws IOException {
-        while (t--> 0) {
+        while (t-- > 0) {
             int n = nextInt();
-            while(n > 0){
-                int p = n % 10;
-                if(p > 0) out.print(p * (int) Math.pow(10, (int) Math.log10(n)) + " ");
+            List<Integer> roundNumbers = new ArrayList<>();
+            
+            int power = 1;
+            while (n > 0) {
+                int digit = n % 10;
+                if (digit > 0) {
+                    roundNumbers.add(digit * power);
+                }
                 n /= 10;
-                System.out.println();
+                power *= 10;
             }
+            
+            out.println(roundNumbers.size());
+            printArray(roundNumbers.stream().mapToInt(Integer::intValue).toArray());
         }
     }
     
