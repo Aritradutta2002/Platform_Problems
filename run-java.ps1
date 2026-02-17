@@ -7,9 +7,30 @@ param(
 $FilePath = $FilePath.Trim('"')
 $WorkspaceRoot = $WorkspaceRoot.Trim('"')
 
+if ([string]::IsNullOrWhiteSpace($FilePath)) {
+    $fallbackFilePath = $args |
+        ForEach-Object { $_.ToString().Trim('"') } |
+        Where-Object { $_ -match '\.java$' } |
+        Select-Object -First 1
+
+    if (-not [string]::IsNullOrWhiteSpace($fallbackFilePath)) {
+        $FilePath = $fallbackFilePath
+    }
+}
+
+if ([string]::IsNullOrWhiteSpace($WorkspaceRoot)) {
+    $WorkspaceRoot = $PSScriptRoot
+}
+
+if ([string]::IsNullOrWhiteSpace($FilePath) -or -not (Test-Path -LiteralPath $FilePath)) {
+    Write-Host "Invalid Java file path passed to script: '$FilePath'" -ForegroundColor Red
+    exit 1
+}
+
 # Compile the Java file
 $binPath = Join-Path $WorkspaceRoot "bin"
-javac -d $binPath $FilePath
+$srcPath = Join-Path $WorkspaceRoot "src"
+javac -d $binPath -sourcepath $srcPath "$FilePath"
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Compilation failed!" -ForegroundColor Red
