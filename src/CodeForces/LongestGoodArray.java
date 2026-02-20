@@ -1,3 +1,7 @@
+// The line `package CodeForces;` in Java is declaring that the current Java file belongs to the
+// `CodeForces` package. Packages in Java are used to organize classes into namespaces, making it
+// easier to manage and locate related classes. In this case, all the classes and code in this Java
+// file will be part of the `CodeForces` package.
 package CodeForces;
 
 /*
