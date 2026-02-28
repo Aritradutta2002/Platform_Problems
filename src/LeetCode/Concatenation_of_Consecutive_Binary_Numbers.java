@@ -2,12 +2,13 @@ package LeetCode;
 /*
  * Author  : Aritra Dutta
  * Target  : Codeforces Expert / CSES
- * Created : 23.02.2026 02:37
+ * Created : 28.02.2026 09:50
  */
 import java.io.*;
+import java.math.BigInteger;
 import java.util.*;
 
-public class BinaryGap {
+public class Concatenation_of_Consecutive_Binary_Numbers {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter out;
@@ -20,33 +21,74 @@ public class BinaryGap {
         br = new BufferedReader(new InputStreamReader(System.in));
         out = new PrintWriter(new BufferedOutputStream(System.out));
         
-        int n = nextInt();
-        System.out.println(binaryGap(n));
+
         
         out.flush();
         out.close();
     }
-    
-    static public int binaryGap(int n) {
-        int lastOnePos = -1;
-        int maxGap = 0;
-        int pos = 0;
-
-        while (n > 0) {
-            if ((n & 1) == 1) {
-                if (lastOnePos != -1) {
-                    maxGap = Math.max(maxGap, pos - lastOnePos);
-                }
-                lastOnePos = pos;
-            }
-            pos++;
-            n >>= 1;
-        }
-
-        return maxGap;
+    // Best approach wrapper
+    public static int concatenatedBinary(int n) {
+        return concatenatedBinaryOptimal(n);
     }
 
+    // Approach 1: Brute force string build + modulo scan
+    // Time: O(total bits), Space: O(total bits)
+    public static int concatenatedBinaryBruteForce(int n) {
+        StringBuilder binary = new StringBuilder();
+        for (int i = 1; i <= n; i++) {
+            binary.append(Integer.toBinaryString(i));
+        }
+
+        long ans = 0;
+        for (int i = 0; i < binary.length(); i++) {
+            ans = (ans * 2 + (binary.charAt(i) - '0')) % MOD;
+        }
+        return (int) ans;
+    }
+
+    // Approach 2: Arithmetic concatenation (no bitwise operators)
+    // Time: O(n log n), Space: O(1)
+    public static int concatenatedBinaryArithmetic(int n) {
+        long ans = 0;
+
+        for (int i = 1; i <= n; i++) {
+            int bitLen = Integer.toBinaryString(i).length();
+            long multiplier = 1;
+
+            for (int j = 0; j < bitLen; j++) {
+                multiplier = (multiplier * 2) % MOD;
+            }
+
+            ans = (ans * multiplier + i) % MOD;
+        }
+
+        return (int) ans;
+    }
+
+    // Approach 3: Optimal bitwise approach
+    // Time: O(n), Space: O(1)
+    public static int concatenatedBinaryOptimal(int n) {
+        long ans = 0;
+        int bitLen = 0;
+
+        for (int i = 1; i <= n; i++) {
+            if ((i & (i - 1)) == 0) bitLen++;
+            ans = ((ans << bitLen) + i) % MOD;
+        }
+
+        return (int) ans;
+    }
     
+
+
+
+
+
+
+
+
+
+
     // ========== FAST I/O ==========
     static String next() throws IOException { while (st == null || !st.hasMoreTokens()) st = new StringTokenizer(br.readLine()); return st.nextToken(); }
     static int nextInt() throws IOException { return Integer.parseInt(next()); }

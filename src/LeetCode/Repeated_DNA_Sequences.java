@@ -2,12 +2,12 @@ package LeetCode;
 /*
  * Author  : Aritra Dutta
  * Target  : Codeforces Expert / CSES
- * Created : 23.02.2026 02:37
+ * Created : 23.02.2026 22:29
  */
 import java.io.*;
 import java.util.*;
 
-public class BinaryGap {
+public class Repeated_DNA_Sequences {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter out;
@@ -20,32 +20,92 @@ public class BinaryGap {
         br = new BufferedReader(new InputStreamReader(System.in));
         out = new PrintWriter(new BufferedOutputStream(System.out));
         
-        int n = nextInt();
-        System.out.println(binaryGap(n));
-        
+        String s = next();
+        List<String> ans = findRepeatedDnaSequences(s);
+        System.out.println(ans);
+
         out.flush();
         out.close();
     }
     
-    static public int binaryGap(int n) {
-        int lastOnePos = -1;
-        int maxGap = 0;
-        int pos = 0;
-
-        while (n > 0) {
-            if ((n & 1) == 1) {
-                if (lastOnePos != -1) {
-                    maxGap = Math.max(maxGap, pos - lastOnePos);
-                }
-                lastOnePos = pos;
-            }
-            pos++;
-            n >>= 1;
-        }
-
-        return maxGap;
+    public static List<String> findRepeatedDnaSequences(String s) {
+        return findRepeatedDnaSequencesRollingBits(s);
     }
 
+    public static List<String> findRepeatedDnaSequencesHashMap(String s) {
+        List<String> ans = new ArrayList<>();
+        HashMap<String, Integer> map = new HashMap<>();
+        int n = s.length();
+        int k = 10;
+        if (n < k) {
+            return ans;
+        }
+        for (int i = 0; i <= (n - k); i++) {
+            String str = s.substring(i, i + k);
+            int count = map.getOrDefault(str, 0) + 1;
+            map.put(str, count);
+            if (count == 2) {
+                ans.add(str);
+            }
+        }
+
+        return ans;
+    }
+
+    public static List<String> findRepeatedDnaSequencesTwoSets(String s) {
+        List<String> ans = new ArrayList<>();
+        int n = s.length();
+        int k = 10;
+        if (n < k) {
+            return ans;
+        }
+
+        HashSet<String> seen = new HashSet<>();
+        HashSet<String> added = new HashSet<>();
+
+        for (int i = 0; i <= n - k; i++) {
+            String current = s.substring(i, i + k);
+            if (!seen.add(current) && added.add(current)) {
+                ans.add(current);
+            }
+        }
+
+        return ans;
+    }
+
+    public static List<String> findRepeatedDnaSequencesRollingBits(String s) {
+        List<String> ans = new ArrayList<>();
+        int n = s.length();
+        int k = 10;
+        if (n < k) {
+            return ans;
+        }
+
+        HashSet<Integer> seen = new HashSet<>();
+        HashSet<Integer> added = new HashSet<>();
+
+        int mask = (1 << (2 * k)) - 1;
+        int code = 0;
+
+        for (int i = 0; i < n; i++) {
+            code = ((code << 2) | encodeDna(s.charAt(i))) & mask;
+
+            if (i >= k - 1) {
+                if (!seen.add(code) && added.add(code)) {
+                    ans.add(s.substring(i - k + 1, i + 1));
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    private static int encodeDna(char ch) {
+        if (ch == 'A') return 0;
+        if (ch == 'C') return 1;
+        if (ch == 'G') return 2;
+        return 3;
+    }
     
     // ========== FAST I/O ==========
     static String next() throws IOException { while (st == null || !st.hasMoreTokens()) st = new StringTokenizer(br.readLine()); return st.nextToken(); }
