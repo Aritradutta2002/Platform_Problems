@@ -3,17 +3,12 @@ package CSES;
 /*
  * Author  : Aritra Dutta
  * Target  : Codeforces Expert / CSES
- * Created : 04.03.2026 22:31
- */
-/*
- * Author  : Aritra Dutta
- * Target  : Codeforces Expert / CSES
- * Created : 04.03.2026 23:37
+ * Created : 06.03.2026 01:57
  */
 import java.io.*;
 import java.util.*;
 
-public class DiceCombinations {
+public class CoinCombinationsII {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter out;
@@ -26,26 +21,24 @@ public class DiceCombinations {
     public static void main(String[] args) throws IOException {
         br = new BufferedReader(new InputStreamReader(System.in));
         out = new PrintWriter(new BufferedOutputStream(System.out));
-
         int n = nextInt();
-        System.out.println(solve(n));
+        int x = nextInt();
+        int[] coins = nextIntArray(n);
+        int[] dp = new int[x + 1];
+        System.out.println(solve(n, x, coins, dp));
+
+        out.flush();
+        out.close();
     }
 
-    static long solve(int n) {
-        if (n == 0)
-            return 0;
-
-        long[] dp = new long[n + 1];
+    static int solve(int n, int x, int[] coins, int[] dp) throws IOException {
         dp[0] = 1;
-        for (int i = 1; i <= n; i++) {
-            for (int face = 1; face <= 6; face++) {
-                if (i >= face) {
-                    dp[i] = (dp[i] + dp[i - face]) % MOD;
-                }
+        for (int j = 0; j < n; j++) {
+            for (int i = coins[j]; i <= x; i++) {
+                dp[i] = (dp[i] + dp[i - coins[j]]) % MOD;
             }
         }
-
-        return dp[n];
+        return dp[x];
     }
 
     // ========== FAST I/O ==========

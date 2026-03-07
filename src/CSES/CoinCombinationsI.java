@@ -1,24 +1,50 @@
 package CSES;
+/*
+ * Author  : Aritra Dutta
+ * Target  : Codeforces Expert / CSES
+ * Created : 06.03.2026 01:14
+ */
 
 /*
- * Author  : Aritra Dutta
- * Target  : Codeforces Expert / CSES
- * Created : 04.03.2026 22:31
+ * Problem : Coin Combinations I
+ * Link    : https://cses.fi/problemset/task/1635
+ *
+ * Description:
+ *   Consider a money system consisting of n coins. Each coin has a positive
+ *   integer value. Your task is to calculate the number of distinct ways
+ *   you can produce a money sum x using the available coins.
+ *   For example, if the coins are {2, 3, 5} and the desired sum is 9,
+ *   there are 8 ways:
+ *     2+2+5, 2+5+2, 5+2+2, 3+3+3,
+ *     2+2+2+3, 2+2+3+2, 2+3+2+2, 3+2+2+2
+ *
+ * Input:
+ *   The first input line has two integers n and x: the number of coins
+ *   and the desired sum of money.
+ *   The second line has n distinct integers c1, c2, ..., cn: the value
+ *   of each coin.
+ *
+ * Output:
+ *   Print one integer: the number of ways modulo 10^9+7.
+ *
+ * Constraints:
+ *   1 <= n <= 100
+ *   1 <= x <= 10^6
+ *   1 <= c_i <= 10^6
+ *
+ * Example:
+ *   Input:  3 9 \n 2 3 5
+ *   Output: 8
  */
-/*
- * Author  : Aritra Dutta
- * Target  : Codeforces Expert / CSES
- * Created : 04.03.2026 23:37
- */
+
 import java.io.*;
 import java.util.*;
 
-public class DiceCombinations {
+public class CoinCombinationsI {
     static BufferedReader br;
     static StringTokenizer st;
     static PrintWriter out;
     static final Random RNG = new Random();
-
     static final int MOD = 1_000_000_007;
     static final int MOD2 = 998244353;
     static final long INF = (long) 1e18;
@@ -26,26 +52,23 @@ public class DiceCombinations {
     public static void main(String[] args) throws IOException {
         br = new BufferedReader(new InputStreamReader(System.in));
         out = new PrintWriter(new BufferedOutputStream(System.out));
-
         int n = nextInt();
-        System.out.println(solve(n));
+        int x = nextInt();
+        int[] coins = nextIntArray(n);
+        int[] dp = new int[x + 1];
+        System.out.println(solve(n, x, coins, dp));
     }
 
-    static long solve(int n) {
-        if (n == 0)
-            return 0;
-
-        long[] dp = new long[n + 1];
+    static long solve(int n, int x, int[] coins, int[] dp) {
         dp[0] = 1;
-        for (int i = 1; i <= n; i++) {
-            for (int face = 1; face <= 6; face++) {
-                if (i >= face) {
-                    dp[i] = (dp[i] + dp[i - face]) % MOD;
+        for (int i = 1; i <= x; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (i >= coins[j]) {
+                    dp[i] = (dp[i] + dp[i - coins[j]]) % MOD;
                 }
             }
         }
-
-        return dp[n];
+        return dp[x];
     }
 
     // ========== FAST I/O ==========
@@ -197,55 +220,55 @@ public class DiceCombinations {
     }
 
     static long sumArray(int[] arr) {
-        long sum = 0;
-        for (int val : arr)
-            sum += val;
-        return sum;
+        long s = 0;
+        for (int v : arr)
+            s += v;
+        return s;
     }
 
     static long sumArray(long[] arr) {
-        long sum = 0;
-        for (long val : arr)
-            sum += val;
-        return sum;
+        long s = 0;
+        for (long v : arr)
+            s += v;
+        return s;
     }
 
     static int minArray(int[] arr) {
-        int min = Integer.MAX_VALUE;
-        for (int val : arr)
-            min = Math.min(min, val);
-        return min;
+        int m = Integer.MAX_VALUE;
+        for (int v : arr)
+            m = Math.min(m, v);
+        return m;
     }
 
     static int maxArray(int[] arr) {
-        int max = Integer.MIN_VALUE;
-        for (int val : arr)
-            max = Math.max(max, val);
-        return max;
+        int m = Integer.MIN_VALUE;
+        for (int v : arr)
+            m = Math.max(m, v);
+        return m;
     }
 
     static int lowerBound(int[] arr, int key) {
-        int left = 0, right = arr.length;
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (arr[mid] < key)
-                left = mid + 1;
+        int l = 0, r = arr.length;
+        while (l < r) {
+            int m = l + (r - l) / 2;
+            if (arr[m] < key)
+                l = m + 1;
             else
-                right = mid;
+                r = m;
         }
-        return left;
+        return l;
     }
 
     static int upperBound(int[] arr, int key) {
-        int left = 0, right = arr.length;
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (arr[mid] <= key)
-                left = mid + 1;
+        int l = 0, r = arr.length;
+        while (l < r) {
+            int m = l + (r - l) / 2;
+            if (arr[m] <= key)
+                l = m + 1;
             else
-                right = mid;
+                r = m;
         }
-        return left;
+        return l;
     }
 
     static void debug(Object... obj) {
