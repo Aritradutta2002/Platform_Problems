@@ -24,6 +24,7 @@ Provide project context and coding guidelines that AI should follow when generat
 - Use underscore-separated words in generated Java filenames.
 - Prefer title-based naming with problem number as suffix when title is provided.
   - Example: `438. Find All Anagrams in a String` -> `Find_All_Anagrams_in_a_String_438.java`
+  - Example: `1886. Determine Whether Matrix Can Be Obtained By Rotation` -> `Determine_Whether_Matrix_Can_Be_Obtained_By_Rotation_1886.java`
 
 ## Java Scaffold Rules (No Solution)
 - Use package matching folder name:
