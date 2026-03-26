@@ -1,4 +1,4 @@
-package LeetCode_Problems;
+package LeetCode;
 import java.util.*;
 @SuppressWarnings("unused")
 

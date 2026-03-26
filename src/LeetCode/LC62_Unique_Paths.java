@@ -1,3 +1,4 @@
+package LeetCode;
 import java.util.*;
 public class LC62_Unique_Paths {
     public static void main(String[] args) {

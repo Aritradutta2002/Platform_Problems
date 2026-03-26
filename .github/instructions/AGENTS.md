@@ -22,17 +22,23 @@ Provide project context and coding guidelines that AI should follow when generat
 
 ## Filename Convention
 - Use underscore-separated words in generated Java filenames.
-- Prefer title-based naming with problem number as suffix when title is provided.
-  - Example: `438. Find All Anagrams in a String` -> `Find_All_Anagrams_in_a_String_438.java`
-  - Example: `1886. Determine Whether Matrix Can Be Obtained By Rotation` -> `Determine_Whether_Matrix_Can_Be_Obtained_By_Rotation_1886.java`
+- For LeetCode, follow the format `LC<ProblemNumber>_<Title>.java`.
+  - Example: `1. Two Sum` -> `LC01_Two_Sum.java`
+  - Example: `438. Find All Anagrams in a String` -> `LC438_Find_All_Anagrams_In_A_String.java`
+  - Example: `1886. Determine Whether Matrix Can Be Obtained By Rotation` -> `LC1886_Determine_Whether_Matrix_Can_Be_Obtained_By_Rotation.java`
+- For CodeForces/CodeChef, follow the format `<Title>_<ProblemID>.java` or underscore-separated words as appropriate.
 
 ## Java Scaffold Rules (No Solution)
 - Use package matching folder name:
   - `package LeetCode;`
   - `package CodeForces;`
   - `package CodeChef;`
+- For LeetCode, always include `import java.util.*;`.
 - Class name must exactly match filename without `.java`.
-- Add correct method signature for the target problem.
+- Create only the LeetCode return methods (nothing other than that).
+- **The LeetCode return method MUST be placed first inside the class (above `main` and other methods).**
+- **Any helper methods used by the LeetCode method MUST be placed after the LeetCode method and before `main`.**
+- **The testcase runner/helper for PASS/FAIL checking must be placed at the very end of the class.**
 - Do not implement algorithm.
 - Method body must throw:
   - `throw new UnsupportedOperationException("Not implemented yet.");`
@@ -43,12 +49,11 @@ Provide project context and coding guidelines that AI should follow when generat
   - short description
   - constraints
   - input/output format (mandatory for CodeForces/CodeChef)
-- Add runnable `main` and test harness:
-  - official sample tests with expected outputs
-  - 2-3 extra tests, and these must be edge cases only (no non-edge extra tests)
-  - this edge-case-only rule applies to LeetCode, CodeForces, and CodeChef scaffolds
-  - PASS/FAIL style output
-  - if method is unimplemented, print `SKIPPED` instead of crashing
+- Add runnable `main` method and test harness:
+  - Use `Scanner` in `main` for input handling if needed.
+  - Include three good test cases (from LeetCode website).
+  - Test harness must output PASS/FAIL for each test case.
+  - If method is unimplemented, print `SKIPPED` instead of crashing.
 
 ## Response Behavior
 - Do not provide hints, algorithm explanation, or full solution unless user explicitly asks.
